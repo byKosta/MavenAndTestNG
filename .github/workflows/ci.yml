@@ -1,13 +1,9 @@
 name: CI
 
 on:
-name: CI
-
-on:
   pull_request:
     branches:
-      - main
-
+      - master
 jobs:
   run-test:
     name: 'Run tests'
