@@ -1,3 +1,5 @@
+package OldTests;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,13 +36,15 @@ public class SaturdayTest {
         // Проверка текста
         Assert.assertEquals(actualText, "Urząd Morski w Gdyni");
     }
+
     @Test
     public void test1() throws InterruptedException {
 
 
     }
+
     @AfterTest
-            public void closeBrowser() {
+    public void closeBrowser() {
         driver.quit();
     }
 
