@@ -1,0 +1,103 @@
+name: CI
+
+on:
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-test:
+    name: 'Run tests'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git clone
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+          cache: 'maven'
+
+#      - name: Get list of changed files
+#        run: echo "LIST_OF_CHANGED_FILES=$(git diff --name-only origin/$GITHUB_HEAD_REF $(git merge-base origin/$GITHUB_HEAD_REF origin/main) | tr '\n' ';')" >> $GITHUB_ENV
+#
+#      - name: Prepare Jenkins data
+#        run: |
+#          cat ${{ github.workspace }}/jenkins_data/jenkins_backup0* > ${{ github.workspace }}/jenkins_backup.tar
+#          md5sum ${{ github.workspace }}/jenkins_backup.tar
+#
+#      - name: Extract Jenkins data and set permission
+#        run: |
+#          tar -xvf ./jenkins_backup.tar
+#          chmod -R 777 ./jenkins_backup/var/jenkins_home
+#
+#      - name: Docker login
+#        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
+#
+#      - name: Docker start
+#        run: docker run --rm --detach -p 8080:8080 -v ${{ github.workspace }}/jenkins_backup/var/jenkins_home:/var/jenkins_home jenkins/jenkins:2.462.3-lts-jdk17
+#
+#      - name: Wait for the Jenkins
+#        run: ./.github/wait-for-jenkins.sh
+#
+#      - name: Create screenshots directory
+#        run: mkdir -p ${{ github.workspace }}/screenshots
+#
+#      - name: Maven test
+#        run: mvn test
+#        env:
+#          CHROME_OPTIONS: --remote-allow-origins=*;--disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless=new;--window-size=1920,1080
+#          APP_OPTIONS: host=localhost;port=8080;admin.username=${{ secrets.ADMIN_USERNAME }};admin.password=${{ secrets.ADMIN_PASSWORD }}
+#          CI_RUN: true
+#
+#      - name: Save run number to artifact
+#        if: always()
+#        run: echo "${{ github.run_number }}" > run_number.txt
+#
+#      - name: Upload run_number artifact
+#        uses: actions/upload-artifact@v4
+#        if: always()
+#        with:
+#          name: my_artifact
+#          path: run_number.txt
+#
+#      - name: Attach screenshots
+#        if: failure()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: screenshots
+#          path: ${{ github.workspace }}/screenshots
+#
+#      - name: Get Allure history
+#        uses: actions/checkout@v4
+#        if: always()
+#        continue-on-error: true
+#        with:
+#          ref: gh-pages
+#          path: gh-pages
+#
+#      - name: Allure Report action
+#        uses: simple-elf/allure-report-action@master
+#        if: always()
+#        id: allure-report
+#        with:
+#          allure_results: target/allure-results
+#          gh_pages: gh-pages
+#          allure_report: allure-report
+#          allure_history: allure-history
+#
+#      - name: Deploy report to Github Pages
+#        if: always()
+#        uses: peaceiris/actions-gh-pages@v2
+#        env:
+#          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          PUBLISH_BRANCH: gh-pages
+#          PUBLISH_DIR: allure-history
