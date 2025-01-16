@@ -169,3 +169,169 @@ Before you start, ensure you have the following tools installed:
    - Ensure `testng.xml` is correctly configured.
 
 ---
+
+# Adding CI/CD to Your Maven and TestNG Project
+
+This guide provides instructions on adding a Continuous Integration (CI) pipeline to your Maven and TestNG project using GitHub Actions. Below, you'll find three examples of CI configuration files (`ci.yml`):
+
+1. **Standard Workflow**: Runs tests on multiple browsers and environments.
+2. **Chrome-Specific Workflow**: Configured exclusively for Chrome.
+3. **Firefox-Specific Workflow**: Configured exclusively for Firefox.
+
+---
+
+## Prerequisites
+
+Before setting up CI, ensure you have the following:
+
+- A GitHub repository for your project.
+- Properly configured `pom.xml` file with dependencies for Selenium and TestNG.
+- Basic understanding of GitHub Actions.
+
+---
+
+## 1. Standard CI Workflow
+
+This workflow runs your tests across multiple environments to ensure compatibility.
+
+```yaml
+name: Standard CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Run Tests
+        run: mvn clean test
+```
+
+---
+
+## 2. Chrome-Specific CI Workflow
+
+Use this configuration to run tests exclusively on Chrome.
+
+```yaml
+name: Chrome CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Install Chrome
+        run: sudo apt-get install google-chrome-stable
+
+      - name: Run Tests on Chrome
+        env:
+          BROWSER: chrome
+        run: mvn clean test
+```
+
+---
+
+## 3. Firefox-Specific CI Workflow
+
+This configuration runs tests exclusively on Firefox.
+
+```yaml
+name: Firefox CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: Install Firefox
+        run: sudo apt-get install firefox
+
+      - name: Run Tests on Firefox
+        env:
+          BROWSER: firefox
+        run: mvn clean test
+```
+
+---
+
+## References
+
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Maven Documentation](https://maven.apache.org/)
+- [TestNG Documentation](https://testng.org/doc/)
+- [Selenium WebDriver Documentation](https://www.selenium.dev/documentation/)
+
+By implementing one of these workflows, you can automate the testing process for your project, ensuring higher quality and stability with each commit or pull request.
+
