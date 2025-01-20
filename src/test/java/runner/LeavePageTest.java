@@ -45,6 +45,13 @@ public class LeavePageTest {
     }
     @Test
     public void leavepage(){
+        By leaveMenuItem = By.xpath("//span[contains(@class, 'oxd-main-menu-item--name') and text()='Leave']");
+        WebElement leaveElement = wait.until(ExpectedConditions.elementToBeClickable(leaveMenuItem));
+        leaveElement.click();
+        By leavePageTitle = By.xpath("//h6[contains(@class, 'oxd-text--h6') and text()='Leave']");
+
+        WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated(leavePageTitle));
+        Assert.assertTrue(titleElement.isDisplayed(), "Leave page title is not displayed.");
 
     }
     @AfterClass
