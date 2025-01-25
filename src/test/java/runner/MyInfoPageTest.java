@@ -57,9 +57,6 @@ public class MyInfoPageTest {
         ));
         Assert.assertTrue(textElement.isDisplayed(), "The text 'Test P Data' is not visible on the page.");
 
-
-
-
     }
     @AfterClass
     public void tearDown() {
