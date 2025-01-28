@@ -11,7 +11,7 @@ import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class DashboardPageTest {
+public class ClaimPageTest {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -41,16 +41,8 @@ public class DashboardPageTest {
                 By.xpath("//img[@alt='profile picture']")));
         Assert.assertTrue(profilePicture.isDisplayed(), "Profile picture is not displayed!");
     }
-    @Test
-    public void dashboard(){
-        WebElement h6Element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h6[@data-v-7b563373][@data-v-c286b6e5][@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']")));
-        String actualText = h6Element.getText();
-        String expectedText = "Dashboard";
-        Assert.assertEquals(actualText, expectedText, "The text of the h6 element does not match the expected value.");
 
-    }
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         if (driver != null) {
             driver.quit();
