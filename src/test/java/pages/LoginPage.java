@@ -17,10 +17,10 @@ public class LoginPage {
     @FindBy(xpath = "//h5[text()='Login']")
     private WebElement loginTitle;
 
-    @FindBy(name = "username")
+    @FindBy(name = "Admin")
     private WebElement usernameField;
 
-    @FindBy(name = "password")
+    @FindBy(name = "admin123")
     private WebElement passwordField;
 
     @FindBy(xpath = "//button[@type='submit']")
