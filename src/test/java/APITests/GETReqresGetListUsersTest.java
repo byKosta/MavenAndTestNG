@@ -19,7 +19,7 @@ public class GETReqresGetListUsersTest {
                 .get("/api/users?page=2")                      // Указываем эндпоинт
                 .then()
                 .statusCode(200)                              // Проверяем статус код 200 (OK)
-                .body("page", equalTo(2))                    // Проверяем, что "page" = 2
+                .body("pages", equalTo(2))                    // Проверяем, что "page" = 2
                 .body("per_page", equalTo(6))                // Проверяем, что "per_page" = 6
                 .body("total", equalTo(12))                  // Проверяем, что "total" = 12
                 .body("total_pages", equalTo(2))             // Проверяем, что "total_pages" = 2
