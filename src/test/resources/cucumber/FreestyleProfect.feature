@@ -1,4 +1,6 @@
-Feature: UMG Gdyni Website Tests
+
+
+Feature: Freestyle job
 
   Scenario: Verify homepage header text
     Given I navigate to UMG Gdyni website
