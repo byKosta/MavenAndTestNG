@@ -13,7 +13,7 @@ public class TestHooks {
     @After
     public void tearDown(Scenario scenario) {
         if (scenario.isFailed()) {
-            // Логирование ошибок или скриншоты
+
         }
     }
 }
