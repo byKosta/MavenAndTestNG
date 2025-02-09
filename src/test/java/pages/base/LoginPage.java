@@ -13,7 +13,7 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // Элементы страницы с аннотациями @FindBy
+
     @FindBy(xpath = "//h5[text()='Login']")
     private WebElement loginTitle;
 
@@ -35,7 +35,7 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    // Методы для взаимодействия с элементами
+
     public void verifyLoginTitle() {
         wait.until(ExpectedConditions.visibilityOf(loginTitle));
     }
