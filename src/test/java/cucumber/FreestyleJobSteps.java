@@ -27,8 +27,13 @@ public class FreestyleJobSteps {
         h1Element = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Urząd Morski w Gdyni']")));
     }
-
-    @Then("The header text should be {string}")
+    @When("I wait for header element to load1")
+    public void waitForHeader1() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        h1Element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[normalize-space()='Urząd Morski w Gdyni']")));
+    }
+    @Then("The header text should be")
     public void verifyHeaderText(String expectedText) {
         Assert.assertEquals(
                 h1Element.getText().trim(),
