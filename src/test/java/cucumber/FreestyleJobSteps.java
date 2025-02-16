@@ -14,7 +14,7 @@ public class FreestyleJobSteps {
     private WebElement h1Element;
 
     @Given("I navigate to UMG Gdyni website")
-    public void navigate_to_website() {
+    public void navigateToWebsite() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -22,18 +22,18 @@ public class FreestyleJobSteps {
     }
 
     @When("I wait for header element to load")
-    public void wait_for_header() {
+    public void waitForHeader() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         h1Element = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Urząd Morski w Gdyni']")));
     }
 
     @Then("The header text should be {string}")
-    public void verify_header_text(String expectedText) {
+    public void verifyHeaderText(String expectedText) {
         Assert.assertEquals(
                 h1Element.getText().trim(),
                 expectedText,
-                "Текст заголовка не соответствует ожидаемому"
+                "Header text does not match expected"
         );
         driver.quit();
     }
