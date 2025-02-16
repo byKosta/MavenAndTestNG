@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/cucumber",
-        glue = {"cucumber","runner"}, // Исправленный путь к пакету с шагами
+        glue = {"cucumber","runner"},
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports.html",
