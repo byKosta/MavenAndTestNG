@@ -9,12 +9,10 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {
                 "pretty",
                 "html:target/cucumber-reports.html",
-                "json:target/cucumber.json",
-                "progress:target/cucumber-progress.log",
-                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+                "json:target/cucumber.json"
         },
-        monochrome = true,
         tags = "not @ignore"
 )
 public class CucumberTest extends AbstractTestNGCucumberTests {
+
 }
