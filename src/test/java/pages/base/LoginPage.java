@@ -13,14 +13,13 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-
     @FindBy(xpath = "//h5[text()='Login']")
     private WebElement loginTitle;
 
-    @FindBy(name = "Admin")
+    @FindBy(name = "username")
     private WebElement usernameField;
 
-    @FindBy(name = "admin123")
+    @FindBy(name = "password")
     private WebElement passwordField;
 
     @FindBy(xpath = "//button[@type='submit']")
@@ -34,7 +33,6 @@ public class LoginPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
-
 
     public void verifyLoginTitle() {
         wait.until(ExpectedConditions.visibilityOf(loginTitle));
@@ -64,3 +62,4 @@ public class LoginPage {
         return profilePicture.isDisplayed();
     }
 }
+

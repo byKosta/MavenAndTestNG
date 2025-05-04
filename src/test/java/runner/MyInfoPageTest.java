@@ -23,7 +23,7 @@ public class MyInfoPageTest {
         // Инициализация WebDriverWait
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-    @Test
+    @Test(priority = 1)
     public void LoginInAccount() {
 
         WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -42,7 +42,7 @@ public class MyInfoPageTest {
         Assert.assertTrue(profilePicture.isDisplayed(), "Profile picture is not displayed!");
     }
 
-    @Test
+    @Test(priority = 2)
     public void myinfo() {
         WebElement myInfoElement = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//a[@class='oxd-main-menu-item' and .//span[text()='My Info']]")
@@ -51,11 +51,11 @@ public class MyInfoPageTest {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Ищем элемент с текстом "Test P Data"
         WebElement textElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h6[contains(@class, 'oxd-text--h6') and text()='Test P Data']")
-        ));
-        Assert.assertTrue(textElement.isDisplayed(), "The text 'Test P Data' is not visible on the page.");
+                By.xpath("//h6[contains(@class, 'oxd-text--h6') and text()='PIM']"))
+        );
+        Assert.assertTrue(textElement.isDisplayed(), "The text 'PIM' is not visible on the page.");
+
 
     }
     @AfterClass
