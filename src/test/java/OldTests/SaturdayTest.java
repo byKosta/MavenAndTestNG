@@ -37,12 +37,6 @@ public class SaturdayTest {
         Assert.assertEquals(actualText, "Urząd Morski w Gdyni");
     }
 
-    @Test
-    public void test1() throws InterruptedException {
-
-
-    }
-
     @AfterTest
     public void closeBrowser() {
         driver.quit();
